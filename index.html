@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Send / Receive Text - Stylish Gradient & Black Box</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #5a3fbb, #c86dd7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #fff;
+    }
+    .container {
+      background: #000000ee;
+      border-radius: 20px;
+      padding: 30px 40px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 12px 40px rgba(200, 109, 215, 0.7);
+      text-align: center;
+      color: white;
+    }
+    h2 {
+      margin-bottom: 25px;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 1.2px;
+      color: #e0c3fc;
+      text-shadow: 0 0 8px #c86dd7;
+    }
+    .btn-group {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    button {
+      background: #7b49d3;
+      border: none;
+      padding: 14px 32px;
+      color: white;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 6px 18px rgba(123, 73, 211, 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      min-width: 130px;
+      flex: 1 1 auto;
+    }
+    button:hover {
+      background: #985de6;
+      box-shadow: 0 8px 25px rgba(152, 93, 230, 0.8);
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 18px;
+      font-size: 1.1rem;
+      border-radius: 14px;
+      border: 2px solid #7b49d3;
+      resize: vertical;
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 20px;
+      background: #1a0a35;
+      color: #eee;
+      transition: border-color 0.3s ease;
+      box-shadow: inset 0 0 10px #7b49d3aa;
+    }
+    textarea:focus {
+      border-color: #c86dd7;
+      outline: none;
+      box-shadow: 0 0 15px #c86dd7;
+      background: #220f4d;
+    }
+    input[type="text"] {
+      padding: 14px 18px;
+      font-size: 1.15rem;
+      border-radius: 14px;
+      border: 2px solid #7b49d3;
+      width: 150px;
+      margin-right: 16px;
+      font-weight: 700;
+      text-align: center;
+      color: #eee;
+      background: #1a0a35;
+      letter-spacing: 4px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: inset 0 0 10px #7b49d3aa;
+    }
+    input[type="text"]:focus {
+      border-color: #c86dd7;
+      outline: none;
+      box-shadow: 0 0 15px #c86dd7;
+      background: #220f4d;
+    }
+    label {
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-right: 12px;
+      vertical-align: middle;
+      color: #d6b8ff;
+    }
+    #sendContainer, #receiveContainer {
+      text-align: left;
+      display: none;
+    }
+    #codeDisplay {
+      background: #7b49d3;
+      padding: 14px 20px;
+      border-radius: 14px;
+      margin-top: 15px;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 8px 25px rgba(123, 73, 211, 0.8);
+      user-select: all;
+      text-align: center;
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+    }
+    #receivedText {
+      background: #1a0a35;
+      color: #ddd;
+      padding: 18px;
+      border-radius: 14px;
+      min-height: 120px;
+      max-height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      box-shadow: inset 0 0 12px rgba(200, 109, 215, 0.7);
+      margin-top: 18px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      user-select: text;
+    }
+    #copyBtn {
+      background: #c86dd7;
+      margin-top: 16px;
+      display: none;
+      border-radius: 30px;
+      padding: 12px 32px;
+      font-weight: 700;
+      box-shadow: 0 6px 22px rgba(200, 109, 215, 0.8);
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    #copyBtn:hover {
+      background: #a14cca;
+    }
+    #loadingContainer {
+      display: none;
+      margin-top: 25px;
+      text-align: center;
+      color: #cbb7ff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      user-select: none;
+    }
+    .spinner {
+      margin: 0 auto 14px auto;
+      width: 42px;
+      height: 42px;
+      border: 5px solid #b39ddb66;
+      border-top-color: #c86dd7;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @media (max-width: 700px) {
+      .container { padding: 25px 25px; max-width: 100%; margin: 12px; }
+      button { margin: 10px 8px; padding: 16px 28px; font-size: 1.15rem; width: 45%; min-width: 120px; }
+      .btn-group { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+      textarea { height: 140px; font-size: 1.1rem; padding: 16px 18px; }
+      input[type="text"] { width: 100%; max-width: 180px; font-size: 1.1rem; margin-bottom: 16px; }
+      #receiveContainer label { display: block; margin-bottom: 8px; font-size: 1.15rem; }
+      #copyBtn { width: 100%; padding: 14px 0; font-size: 1.15rem; }
+    }
+    @media (max-width: 400px) {
+      h2 { font-size: 1.6rem; }
+      textarea { height: 120px; }
+      button { width: 100% !important; margin: 10px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Send or Receive Text with 4-digit Code</h2>
+
+  <div class="btn-group">
+    <button id="btnSendText">Send Text</button>
+    <button id="btnReceiveText">Receive Text</button>
+  </div>
+
+  <div id="sendContainer">
+    <textarea id="sendTextArea" placeholder="Paste or type your text here..."></textarea>
+    <button id="sendBtn">Send</button>
+    <div id="loadingContainer">
+      <div class="spinner"></div>
+      <div>Wait, OTP is loading...</div>
+    </div>
+    <div id="codeDisplay"></div>
+  </div>
+
+  <div id="receiveContainer">
+    <label for="codeInput">Enter 4-digit code:</label>
+    <input type="text" id="codeInput" maxlength="4" pattern="\d{4}" />
+    <button id="receiveBtn">Receive</button>
+    <div id="receivedText"></div>
+    <button id="copyBtn">Copy Text</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCOUouIbobBZvpubFuIf2Rb84k-4qkKmjU",
+    authDomain: "textsendreceive.firebaseapp.com",
+    databaseURL: "https://textsendreceive-default-rtdb.firebaseio.com",
+    projectId: "textsendreceive",
+    storageBucket: "textsendreceive.appspot.com",
+    messagingSenderId: "180810658410",
+    appId: "1:180810658410:web:e056ed0b811b8c604e5013"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  const btnSendText = document.getElementById('btnSendText');
+  const btnReceiveText = document.getElementById('btnReceiveText');
+  const sendContainer = document.getElementById('sendContainer');
+  const receiveContainer = document.getElementById('receiveContainer');
+  const sendTextArea = document.getElementById('sendTextArea');
+  const sendBtn = document.getElementById('sendBtn');
+  const codeDisplay = document.getElementById('codeDisplay');
+  const codeInput = document.getElementById('codeInput');
+  const receiveBtn = document.getElementById('receiveBtn');
+  const receivedText = document.getElementById('receivedText');
+  const copyBtn = document.getElementById('copyBtn');
+  const loadingContainer = document.getElementById('loadingContainer');
+
+  btnSendText.addEventListener('click', () => {
+    sendContainer.style.display = 'block';
+    receiveContainer.style.display = 'none';
+    codeDisplay.textContent = '';
+    sendTextArea.value = '';
+    loadingContainer.style.display = 'none';
+  });
+
+  btnReceiveText.addEventListener('click', () => {
+    sendContainer.style.display = 'none';
+    receiveContainer.style.display = 'block';
+    receivedText.textContent = '';
+    copyBtn.style.display = 'none';
+    codeInput.value = '';
+  });
+
+  function generateCode() {
+    return Math.floor(1000 + Math.random() * 9000).toString();
+  }
+
+  sendBtn.addEventListener('click', () => {
+    const text = sendTextArea.value.trim();
+    if (!text) {
+      alert('Please enter some text before sending.');
+      return;
+    }
+
+    loadingContainer.style.display = 'block';
+    codeDisplay.textContent = '';
+    sendBtn.disabled = true;
+    btnSendText.disabled = true;
+    btnReceiveText.disabled = true;
+
+    const trySave = (code) => {
+      db.ref('messages/' + code).get().then(snapshot => {
+        if (snapshot.exists()) {
+          trySave(generateCode());
+        } else {
+          setTimeout(() => {
+            db.ref('messages/' + code).set({
+              text: text,
+              timestamp: Date.now()
+            }).then(() => {
+              loadingContainer.style.display = 'none';
+              codeDisplay.textContent = 'Your 4-digit code is: ' + code;
+              sendBtn.disabled = false;
+              btnSendText.disabled = false;
+              btnReceiveText.disabled = false;
+            }).catch(() => {
+              loadingContainer.style.display = 'none';
+              alert('Error saving message, please try again.');
+              sendBtn.disabled = false;
+              btnSendText.disabled = false;
+              btnReceiveText.disabled = false;
+            });
+          }, 2000);
+        }
+      }).catch(() => {
+        loadingContainer.style.display = 'none';
+        alert('Error accessing database, check internet.');
+        sendBtn.disabled = false;
+        btnSendText.disabled = false;
+        btnReceiveText.disabled = false;
+      });
+    };
+
+    trySave(generateCode());
+  });
+
+  receiveBtn.addEventListener('click', () => {
+    const code = codeInput.value.trim();
+    if (!/^\d{4}$/.test(code)) {
+      alert('Please enter a valid 4-digit code.');
+      return;
+    }
+
+    db.ref('messages/' + code).get().then(snapshot => {
+      if (snapshot.exists()) {
+        receivedText.textContent = snapshot.val().text;
+        copyBtn.style.display = 'inline-block';
+        setTimeout(() => { receivedText.scrollTop = 0; }, 100);
+      } else {
+        alert('No message found for this code.');
+        receivedText.textContent = '';
+        copyBtn.style.display = 'none';
+      }
+    }).catch(() => {
+      alert('Error accessing database, check internet.');
+    });
+  });
+
+  // ✅ FINAL FIXED COPY FUNCTION
+  copyBtn.addEventListener('click', () => {
+    const textToCopy = receivedText.innerText.trim();
+    if (!textToCopy) {
+      alert('No text available to copy.');
+      return;
+    }
+
+    // Create hidden textarea to ensure full compatibility
+    const hiddenTextarea = document.createElement('textarea');
+    hiddenTextarea.value = textToCopy;
+    document.body.appendChild(hiddenTextarea);
+    hiddenTextarea.select();
+    hiddenTextarea.setSelectionRange(0, 99999); // For mobile devices
+
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        alert('Text copied to clipboard!');
+      } else {
+        throw new Error('Copy command failed');
+      }
+    } catch (err) {
+      console.error('Copy failed', err);
+      alert('Failed to copy text. Try manually selecting and copying.');
+    }
+
+    document.body.removeChild(hiddenTextarea);
+  });
+</script>
+
+</body>
+</html>

@@ -38,29 +38,26 @@
         <button class="main-tab" id="tab-receive" type="button" role="tab" aria-selected="false" data-tab="receive"><span class="tab-icon" aria-hidden="true">↙</span> Receive text</button>
       </div>
       <section class="panel" id="panel-send" aria-labelledby="tab-send">
-        <div class="panel-heading"><div><h3>Send text</h3></div><p>8,000 characters max</p></div>
+        <div class="panel-heading"><div><h3>Send text</h3></div></div>
         <div class="composer-area text-composer">
           <label class="field-label" for="message-text">MESSAGE</label>
           <textarea id="message-text" maxlength="8000" placeholder="Write your message here…" spellcheck="true"></textarea>
-          <div class="field-meta"><span>Text only</span><span id="character-count">0 / 8,000</span></div>
+          <div class="field-meta"><span></span><span id="character-count">0 / 8,000</span></div>
         </div>
         <div class="action-row"><button class="primary-button" id="send-button" type="button"><span id="send-button-label">Create code</span><span aria-hidden="true">↗</span></button></div>
         <div class="feedback" id="send-feedback" role="status" aria-live="polite" hidden></div>
         <div class="code-result" id="code-result" hidden><div><span class="result-overline">SHARE THIS CODE</span><p class="result-code" id="created-code">0000</p></div><button class="secondary-button" id="copy-code" type="button">Copy code</button></div>
       </section>
       <section class="panel" id="panel-receive" aria-labelledby="tab-receive" hidden>
-        <div class="panel-heading"><div><h3>Receive text</h3></div><p>4-digit code</p></div>
-        <label class="field-label" for="receive-code">ONE-TIME CODE</label>
-        <input id="receive-code" class="code-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="4" pattern="[0-9]{4}" placeholder="••••" aria-describedby="receive-code-help">
+        <div class="panel-heading"><div><h3>Receive text</h3></div></div>
+        <label class="field-label" for="receive-code">CODE</label>
+        <input id="receive-code" class="code-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="4" pattern="[0-9]{4}" placeholder="••••">
         
         <div class="action-row"><button class="primary-button" id="receive-button" type="button"><span id="receive-button-label">Receive text</span><span aria-hidden="true">↙</span></button></div>
         <div class="feedback" id="receive-feedback" role="status" aria-live="polite" hidden></div>
         <article class="received-card" id="received-card" hidden><div class="received-card-header"><div><span class="result-overline" id="received-type">RECEIVED TEXT</span></div><button class="secondary-button" id="copy-message" type="button">Copy text</button></div><div class="received-content" id="received-content"></div></article>
       </section>
-      <div class="privacy-note"><span class="lock-mark" aria-hidden="true">⌑</span><span>Text only <small>Do not share sensitive information.</small></span></div>
-      <div class="workspace-bottom"><span>QUIETSEND / TEXT ONLY</span><span>ONE CODE · ONE MESSAGE</span></div>
     </section>
   </main>
-  <footer class="site-footer shell"><span>QuietSend <span>/ text</span></span></footer>
 </body>
 </html>

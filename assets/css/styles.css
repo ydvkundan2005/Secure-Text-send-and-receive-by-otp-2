@@ -151,3 +151,20 @@ a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{c
   .main-tab { min-width: 0; padding-inline: 10px; }
   .brand-name { font-size: 13px; }
 }
+
+
+/* Compact actions and clean message states */
+.panel-heading { margin-bottom: 18px; }
+.panel-heading p { display: none; }
+.action-row { margin-top: 14px; }
+#send-feedback:empty, #receive-feedback:empty { display: none !important; }
+.privacy-note, .workspace-bottom, .site-footer { display: none !important; }
+.code-result { margin-top: 16px; padding: 18px; border-radius: 12px; }
+.code-result .result-code { letter-spacing: .18em; }
+.received-card { margin-top: 18px; padding: 18px; border-radius: 12px; }
+.received-content { line-height: 1.7; }
+@media (max-width: 720px) {
+  .action-row { margin-top: 12px; }
+  .code-result { gap: 12px; }
+  .code-result .secondary-button { width: 100%; }
+}

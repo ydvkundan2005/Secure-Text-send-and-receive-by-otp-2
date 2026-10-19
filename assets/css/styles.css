@@ -81,3 +81,73 @@ a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{c
  .recorder-stage{min-height:190px}.workspace-bottom{letter-spacing:.04em}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* Layout hardening: prevent action buttons and helper text from colliding. */
+.workspace, .panel, .composer-area, .action-row, .code-result, .received-card,
+.panel-heading, .privacy-note, .how-grid, .how-card { min-width: 0; }
+.action-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 14px 18px;
+}
+.action-row .primary-button {
+  flex: 0 1 auto;
+  width: auto;
+  max-width: 100%;
+  min-width: min(220px, 100%);
+  white-space: normal;
+}
+.action-caption {
+  flex: 1 1 180px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.code-result, .received-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.code-result[hidden], .received-card[hidden], .panel[hidden], .feedback[hidden] {
+  display: none !important;
+}
+#message-text, #receive-code, .received-content, .received-text {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+#message-text {
+  display: block;
+  width: 100%;
+  min-height: 180px;
+  resize: vertical;
+  line-height: 1.7;
+}
+.feedback { overflow-wrap: anywhere; }
+.privacy-note { align-items: flex-start; }
+.privacy-note small { display: block; max-width: 100%; overflow-wrap: anywhere; }
+.workspace-bottom { flex-wrap: wrap; gap: 8px 18px; }
+@media (max-width: 720px) {
+  .shell { width: min(calc(100% - 28px), var(--max)); }
+  .workspace { padding: clamp(18px, 5vw, 28px); }
+  .panel-heading { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .panel-heading > p { margin: 0; }
+  .action-row { align-items: stretch; flex-direction: column; gap: 10px; }
+  .action-row .primary-button { width: 100%; min-width: 0; }
+  .action-caption { flex: 0 1 auto; text-align: left; }
+  .code-result { align-items: flex-start; flex-direction: column; }
+  .code-result .secondary-button { width: 100%; }
+  .received-card-header { align-items: flex-start; }
+}
+@media (max-width: 380px) {
+  .shell { width: calc(100% - 22px); }
+  .workspace { padding: 16px; }
+  .main-tab { min-width: 0; padding-inline: 10px; }
+  .brand-name { font-size: 13px; }
+}

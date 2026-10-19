@@ -24,46 +24,43 @@
   <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
   <header class="topbar">
     <a class="brand" href="#" aria-label="QuietSend home"><span class="brand-symbol" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand-name">QuietSend <span>/ text</span></span></a>
-    <div class="topbar-right"><span class="connection-status" id="connection-status" data-state="info"><i></i><span>Connecting</span></span><a class="topbar-link" href="#how-it-works">How it works <span>↘</span></a></div>
+    <div class="topbar-right"><span class="connection-status" id="connection-status" data-state="info"><i></i><span>Connecting</span></span></div>
   </header>
   <main>
     <section class="intro shell">
-      <p class="eyebrow"><span class="eyebrow-dot"></span> ONE-TIME TEXT SHARING · SIMPLE BY DESIGN</p>
-      <h1>Words that arrive.<br><span>Then disappear.</span></h1>
-      <p class="intro-copy">Write a message, create a four-digit code, and share that code with your recipient. No media, no clutter — just text when it matters.</p>
-      <div class="intro-detail"><span class="detail-icon" aria-hidden="true">✳</span><span>Minimal interface. Familiar Firebase service. One-time retrieval.</span></div>
+      <p class="eyebrow"><span class="eyebrow-dot"></span> TEXT SHARING</p>
+      <h1>Send a thought.<br><span>Keep it simple.</span></h1>
     </section>
     <section class="workspace shell" id="workspace" aria-label="Text sharing app">
-      <div class="workspace-top"><div><p class="section-overline">YOUR MESSAGE SPACE</p><h2>Send something<br>worth reading.</h2></div><span class="workspace-mark">QS / 01</span></div>
+      <div class="workspace-top"><div><p class="section-overline">QUIETSEND</p><h2>Text message</h2></div><span class="workspace-mark">TEXT ONLY</span></div>
       <div class="main-tabs" role="tablist" aria-label="Choose an action">
         <button class="main-tab is-active" id="tab-send" type="button" role="tab" aria-selected="true" data-tab="send"><span class="tab-icon" aria-hidden="true">↗</span> Send text</button>
         <button class="main-tab" id="tab-receive" type="button" role="tab" aria-selected="false" data-tab="receive"><span class="tab-icon" aria-hidden="true">↙</span> Receive text</button>
       </div>
       <section class="panel" id="panel-send" aria-labelledby="tab-send">
-        <div class="panel-heading"><div><span class="step-label">STEP 01 / COMPOSE</span><h3>A thought, in your words.</h3></div><p>Up to 8,000 characters</p></div>
+        <div class="panel-heading"><div><h3>Send text</h3></div><p>8,000 characters max</p></div>
         <div class="composer-area text-composer">
           <label class="field-label" for="message-text">MESSAGE</label>
           <textarea id="message-text" maxlength="8000" placeholder="Write your message here…" spellcheck="true"></textarea>
-          <div class="field-meta"><span>Text only · Plain and simple</span><span id="character-count">0 / 8,000</span></div>
+          <div class="field-meta"><span>Text only</span><span id="character-count">0 / 8,000</span></div>
         </div>
-        <div class="action-row"><button class="primary-button" id="send-button" type="button"><span id="send-button-label">Create one-time code</span><span aria-hidden="true">↗</span></button><span class="action-caption">A code is created after you send.</span></div>
+        <div class="action-row"><button class="primary-button" id="send-button" type="button"><span id="send-button-label">Create code</span><span aria-hidden="true">↗</span></button></div>
         <div class="feedback" id="send-feedback" role="status" aria-live="polite" hidden></div>
-        <div class="code-result" id="code-result" hidden><div><span class="result-overline">SHARE THIS CODE</span><p class="result-code" id="created-code">0000</p><p class="result-caption">Send this four-digit code to your recipient.</p></div><button class="secondary-button" id="copy-code" type="button">Copy code</button></div>
+        <div class="code-result" id="code-result" hidden><div><span class="result-overline">SHARE THIS CODE</span><p class="result-code" id="created-code">0000</p></div><button class="secondary-button" id="copy-code" type="button">Copy code</button></div>
       </section>
       <section class="panel" id="panel-receive" aria-labelledby="tab-receive" hidden>
-        <div class="panel-heading"><div><span class="step-label">STEP 01 / RECEIVE</span><h3>Enter the code you received.</h3></div><p>Four digits</p></div>
+        <div class="panel-heading"><div><h3>Receive text</h3></div><p>4-digit code</p></div>
         <label class="field-label" for="receive-code">ONE-TIME CODE</label>
         <input id="receive-code" class="code-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="4" pattern="[0-9]{4}" placeholder="••••" aria-describedby="receive-code-help">
-        <p id="receive-code-help" class="input-help">The message is removed after it is successfully retrieved.</p>
-        <div class="action-row"><button class="primary-button" id="receive-button" type="button"><span id="receive-button-label">Receive message</span><span aria-hidden="true">↙</span></button></div>
+        
+        <div class="action-row"><button class="primary-button" id="receive-button" type="button"><span id="receive-button-label">Receive text</span><span aria-hidden="true">↙</span></button></div>
         <div class="feedback" id="receive-feedback" role="status" aria-live="polite" hidden></div>
-        <article class="received-card" id="received-card" hidden><div class="received-card-header"><div><span class="result-overline" id="received-type">TEXT</span><h3 id="received-heading">A note for you.</h3></div><button class="secondary-button" id="copy-message" type="button">Copy text</button></div><div class="received-content" id="received-content"></div><p class="consume-note"><span aria-hidden="true">✓</span> Retrieved successfully. This message is no longer available through its code.</p></article>
+        <article class="received-card" id="received-card" hidden><div class="received-card-header"><div><span class="result-overline" id="received-type">RECEIVED TEXT</span></div><button class="secondary-button" id="copy-message" type="button">Copy text</button></div><div class="received-content" id="received-content"></div></article>
       </section>
-      <div class="privacy-note"><span class="lock-mark" aria-hidden="true">⌑</span><span>Designed for one-time retrieval <small>Use strong Firebase Realtime Database security rules. A four-digit code is not encryption.</small></span></div>
+      <div class="privacy-note"><span class="lock-mark" aria-hidden="true">⌑</span><span>Text only <small>Do not share sensitive information.</small></span></div>
       <div class="workspace-bottom"><span>QUIETSEND / TEXT ONLY</span><span>ONE CODE · ONE MESSAGE</span></div>
     </section>
-    <section class="how-section shell" id="how-it-works"><div class="how-heading"><p class="section-overline">A SMALL, CLEAR FLOW</p><h2>Three steps. Nothing extra.</h2></div><div class="how-grid"><article class="how-card"><span class="how-number">01</span><span class="how-symbol" aria-hidden="true">↗</span><h3>Write</h3><p>Type the message you want to share. Text only, with no media permissions.</p></article><article class="how-card"><span class="how-number">02</span><span class="how-symbol" aria-hidden="true">⌗</span><h3>Share the code</h3><p>QuietSend saves the message in your existing Firebase Realtime Database and gives you a four-digit code.</p></article><article class="how-card"><span class="how-number">03</span><span class="how-symbol" aria-hidden="true">✓</span><h3>Receive once</h3><p>The recipient enters the code to retrieve the text. The app attempts to remove the record after a successful retrieval.</p></article></div><p class="footer-note"><strong>A note on privacy.</strong> Four-digit codes can be guessed and do not encrypt message content. Database rules must enforce who can read, create, and delete messages. Client-side deletion is best-effort, not a guaranteed secure-erasure mechanism.</p></section>
   </main>
-  <footer class="site-footer shell"><span>QuietSend <span>/ text</span></span><span>Built for simple, one-time text sharing.</span></footer>
+  <footer class="site-footer shell"><span>QuietSend <span>/ text</span></span></footer>
 </body>
 </html>

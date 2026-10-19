@@ -44,10 +44,8 @@
   function setBusy(button, busy, label, text) {
     button.disabled = busy;
     const span = el(label);
-    if (text) {
-      if (!span.dataset.initialLabel) span.dataset.initialLabel = span.textContent;
-      span.textContent = busy ? text : span.dataset.initialLabel;
-    }
+    if (!span.dataset.initialLabel) span.dataset.initialLabel = span.textContent;
+    span.textContent = busy ? (text || 'Working…') : span.dataset.initialLabel;
   }
 
   function activateTab(name) {

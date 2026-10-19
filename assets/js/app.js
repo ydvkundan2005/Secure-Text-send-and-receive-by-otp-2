@@ -99,7 +99,7 @@
       });
       $('panel-send').hidden = !isSend;
       $('panel-receive').hidden = isSend;
-      feedbackSend(feedbackSend, '', 'info');
+      feedback(feedbackSend, '', 'info');
       feedback(feedbackReceive, '', 'info');
       if (window.matchMedia('(max-width:720px)').matches) {
         $('workspace').scrollIntoView({ behavior: 'smooth', block: 'start' });

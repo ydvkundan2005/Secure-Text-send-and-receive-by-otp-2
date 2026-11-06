@@ -1,4 +1,4 @@
-# QuietSend — One-time text sharing with the otp
+# QuietSend — One-time text sharing with the simple 4 Digits otp
 
 QuietSend is a small browser-based text-sharing application built with HTML, CSS, JavaScript and Firebase Realtime Database.
 
